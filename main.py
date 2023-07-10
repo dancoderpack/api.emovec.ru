@@ -1,10 +1,62 @@
-from app import Server
+import dataclasses
+
+from flask import Flask, request, send_from_directory
+
+from flask_cors import CORS
+from config import get_config
+
+from webapi.repository import get_library
+from music_preprocess.ContinuousEmotionRepresentation import ContinuousEmotionRepresentation
+from music_preprocess.gpt import get_description
+from webapi.recomendation.song_recomendation import get_recommendation
+
+app = Flask("song-emotion-demo")
 
 
-def main():
-    server = Server()
-    server.run()
+# origins = "[]"
+# CORS(app, resources={r"/*": {"origins": origins}})
+
+@app.route("/public/<path:filename>")
+def serve_static(filename):
+    return send_from_directory("public", filename)
 
 
-if __name__ == '__main__':
-    main()
+@app.route('/predictValuesDemo', methods=['GET'])
+def get_values():
+    filename = request.get_json()['filename']
+    emotion_representation = ContinuousEmotionRepresentation(song=filename)
+    return dataclasses.asdict(emotion_representation.get_static_prediction_result())
+
+
+@app.route('/predict', methods=['POST'])
+def get_prediction():
+    song_length = int(request.form['song_length'])
+    period = int(request.form['period'])
+    song = request.files['song']
+    print(type(song_length))
+
+    emotion_representation = ContinuousEmotionRepresentation(song, song_length, period)
+    return dataclasses.asdict(emotion_representation.get_static_prediction_result())
+
+
+@app.route('/gpt_description', methods=['GET'])
+def get_gpt_description():
+    arousal = request.get_json()['arousal']
+    valence = request.get_json()['valence']
+    arousal = float(arousal)
+    valence = float(valence)
+    return dataclasses.asdict(get_description(arousal, valence))
+
+
+@app.route('/library', methods=['GET'])
+def get_library_api():
+    return get_library()
+
+
+@app.route('/recommendation', methods=['GET'])
+def get_songs_recommendation():
+    ids = request.get_json()['ids']
+    return dataclasses.asdict(get_recommendation(ids))
+
+# port = get_config().port
+# self.__app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
