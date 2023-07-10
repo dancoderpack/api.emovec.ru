@@ -5,4 +5,3 @@ from dataclasses import dataclass
 class Config:
     open_ai_api_key: str
     web_domain: str
-    port: int

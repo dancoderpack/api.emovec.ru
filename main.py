@@ -3,7 +3,6 @@ import dataclasses
 from flask import Flask, request, send_from_directory
 
 from flask_cors import CORS
-from config import get_config
 
 from webapi.repository import get_library
 from music_preprocess.ContinuousEmotionRepresentation import ContinuousEmotionRepresentation
@@ -12,9 +11,8 @@ from webapi.recomendation.song_recomendation import get_recommendation
 
 app = Flask("song-emotion-demo")
 
+CORS(app, resources={r"/*": {"origins": "[https://emovec.ru, https://www.emovec.ru]"}})
 
-# origins = "[]"
-# CORS(app, resources={r"/*": {"origins": origins}})
 
 @app.route("/public/<path:filename>")
 def serve_static(filename):
@@ -57,6 +55,3 @@ def get_library_api():
 def get_songs_recommendation():
     ids = request.get_json()['ids']
     return dataclasses.asdict(get_recommendation(ids))
-
-# port = get_config().port
-# self.__app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)

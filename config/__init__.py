@@ -9,6 +9,5 @@ def get_config(env_file_path: str = ".env") -> Config:
     config = Config(
         open_ai_api_key=env.str("OPEN_AI_API_KEY"),
         web_domain=env.str("WEB_DOMAIN"),
-        port=env.int("PORT"),
     )
     return config
