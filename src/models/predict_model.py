@@ -60,8 +60,8 @@ class Predictor:
             arousal.append(arousal_sec.cpu().detach().numpy())
         if sec is not None:
             valence, arousal = get_pad(valence, arousal, sec)
-        valence = [round(float(v), 2) for v in valence]
-        arousal = [round(float(a), 2) for a in arousal]
+        valence = [round(float((((v - 0) * (1 + 1)) / (1 - 0)) - 1), 4) for v in valence]
+        arousal = [round(float((((a - 0) * (1 + 1)) / (1 - 0)) - 1), 4) for a in arousal]
         if mean_sec > 1:
             valence, arousal = count_sec_mean(valence, arousal, mean_sec)
         return valence, arousal
