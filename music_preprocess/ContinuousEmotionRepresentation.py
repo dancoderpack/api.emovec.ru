@@ -96,12 +96,12 @@ class ContinuousEmotionRepresentation:
         distance = self.__get_distance()
         prediction_response = GetPredictionResponse(
             stats=Stats(
-                mean_valence=mean_valence,
-                mean_arousal=mean_arousal,
-                std_valence=std_valence,
-                std_arousal=std_arousal,
-                qc_arousal=qc_arousal,
-                qc_valence=qc_valence,
+                mean_valence=round(mean_valence, 4),
+                mean_arousal=round(mean_arousal, 4),
+                std_valence=round(std_valence, 4),
+                std_arousal=round(std_arousal, 4),
+                qc_arousal=round(qc_arousal, 4),
+                qc_valence=round(qc_valence, 4),
             ),
             avd_vector=AVDVector(
                 arousal=self.arousal,
