@@ -52,7 +52,7 @@ def get_library_api():
     return get_library()
 
 
-@app.route('/recommendation', methods=['GET'])
+@app.route('/recommendation', methods=['POST'])
 def get_songs_recommendation():
     ids = request.get_json()['ids']
     return dataclasses.asdict(get_recommendation(ids))
