@@ -12,7 +12,7 @@ def get_recommendation(ids):
     # df.drop(columns=['genres'], inplace=True)
     # normalized_float_df = normalize(df)
     # features_df = pd.concat([df[['id']], genre_df, normalized_float_df], axis=1)
-    features_df = pd.read_csv('webapi/rec_sys.csv')
+    features_df = pd.read_csv('webapi/recomendation/rec_sys.csv')
     vector = features_df[features_df['id'].isin(ids)].drop(columns=['id']).mean(axis=0)
     all_songs = features_df[~features_df['id'].isin(ids)].drop(columns=['id'])
     try:
