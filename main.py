@@ -21,7 +21,8 @@ def serve_static(filename):
 
 @app.route('/predictValuesDemo', methods=['GET'])
 def get_values():
-    filename = request.get_json()['filename']
+    id = request.get_json()['id']
+    filename = request.get_json()['filename'] #TODO
     emotion_representation = ContinuousEmotionRepresentation(song=filename)
     return dataclasses.asdict(emotion_representation.get_static_prediction_result())
 
