@@ -10,10 +10,6 @@ from music_preprocess.ContinuousEmotionRepresentation import ContinuousEmotionRe
 from music_preprocess.gpt import get_description
 from webapi.recomendation.song_recomendation import get_recommendation
 
-import soundfile as sf
-
-print(sf.read("public/music/661y1Uk3VKNR4b9QWC7ziV.mp3"))
-
 app = Flask("song-emotion-demo")
 
 CORS(app, resources={r"/*": {"origins": "[https://emovec.ru, https://www.emovec.ru]"}})
