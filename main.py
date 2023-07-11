@@ -19,10 +19,10 @@ def serve_static(filename):
     return send_from_directory("public", filename)
 
 
-@app.route('/predictValuesDemo', methods=['GET'])
+@app.route('/predictValuesDemo', methods=['POST'])
 def get_values():
-    id = request.get_json()['id']
-    filename = request.get_json()['filename'] #TODO
+    song_id = request.get_json()['id']
+    filename = f'public/music/{song_id}.mp3'
     emotion_representation = ContinuousEmotionRepresentation(song=filename)
     return dataclasses.asdict(emotion_representation.get_static_prediction_result())
 
