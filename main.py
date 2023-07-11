@@ -25,7 +25,7 @@ def get_values():
     song_id = request.get_json()['id']
     filename = f'public/music/{song_id}.mp3'
     print(soundfile.read(filename))
-    emotion_representation = ContinuousEmotionRepresentation(song=filename)
+    emotion_representation = ContinuousEmotionRepresentation(song=soundfile.read(filename))
     return dataclasses.asdict(emotion_representation.get_static_prediction_result())
 
 
