@@ -70,8 +70,8 @@ def normalize_mfccs(mfcc):
         Returns:
             torch.Tensor: Normalized MFCC tensor.
         """
-    mean = torch.tensor(13.6826, dtype=torch.float)
-    std = torch.tensor(53.5789, dtype=torch.float)
+    mean = torch.tensor(13.7398, dtype=torch.float)
+    std = torch.tensor(54.0514, dtype=torch.float)
     return (mfcc - mean) / std
 
 
