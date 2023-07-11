@@ -28,7 +28,6 @@ class Predictor:
         self.model_arousal.eval()
         self.model_valence.eval()
 
-
     def predict(self, song, sec=None, mean_sec=1):
         """
                 Predicts emotion values for a given song.
@@ -41,6 +40,7 @@ class Predictor:
                 Returns:
                     tuple: A tuple containing the predicted valence and arousal values.
                 """
+        print(song)
         data, sr = sf.read(song)
         data = make_mono_sound(data)
 

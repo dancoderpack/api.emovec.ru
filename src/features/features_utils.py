@@ -85,8 +85,9 @@ def make_mono_sound(song):
         Returns:
             song (np.ndarray): Mono audio waveform.
         """
-    if song.shape[1] > 1:
-        song = librosa.to_mono(song.T)
+    if len(song.shape) > 1:
+        if song.shape[1] > 1:
+            song = librosa.to_mono(song.T)
     return song
 
 
