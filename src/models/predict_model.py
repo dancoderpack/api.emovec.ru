@@ -40,7 +40,6 @@ class Predictor:
                 Returns:
                     tuple: A tuple containing the predicted valence and arousal values.
                 """
-        print(song)
         data, sr = sf.read(song)
         data = make_mono_sound(data)
 

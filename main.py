@@ -1,6 +1,5 @@
 import dataclasses
 
-import soundfile
 from flask import Flask, request, send_from_directory
 
 from flask_cors import CORS
@@ -24,8 +23,7 @@ def serve_static(filename):
 def get_values():
     song_id = request.get_json()['id']
     filename = f'public/music/{song_id}.mp3'
-    print(soundfile.read(filename))
-    emotion_representation = ContinuousEmotionRepresentation(song=soundfile.read(filename))
+    emotion_representation = ContinuousEmotionRepresentation(song=filename)
     return dataclasses.asdict(emotion_representation.get_static_prediction_result())
 
 
